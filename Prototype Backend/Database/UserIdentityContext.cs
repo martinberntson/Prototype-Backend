@@ -9,17 +9,17 @@ namespace Prototype_Backend.Database
         protected readonly IConfiguration Configuration;
         protected readonly IConfigurationBuilder ConfigurationBuilder;
 
-        public UserIdentityContext(IConfiguration configuration, IConfigurationBuilder configurationBuilder)
+        public UserIdentityContext(IConfiguration configuration)
         {
             Configuration = configuration;
-            ConfigurationBuilder = configurationBuilder;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             // connect to sql server with connection string from app settings
-            if (Program.InProduction) options.UseSqlServer($"https://{Configuration["KeyVaultName"]}.vault.azure.net/");
-            else options.UseSqlServer(Configuration["ConnectionString"]);
+            //if (Program.InProduction) options.UseSqlServer($"https://{Configuration["KeyVaultName"]}.vault.azure.net/");
+            //else 
+                options.UseSqlServer(Configuration["ConnectionString"]);
         }
         internal DbSet<User> Users { get; set; }
         internal DbSet<Identity> Identities { get; set; }
